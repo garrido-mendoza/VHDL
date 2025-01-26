@@ -6,23 +6,27 @@ end async_rst_tb;
 
 architecture Behavioral of async_rst_tb is
 
-component async_rst is
-    port (  clk : in bit;
-            rst_f : in bit;
-            count : out integer);
-end component;
+    component async_rst is
+        port (
+            clk    : in bit;
+            rst_f  : in bit;
+            count  : out integer
+        );
+    end component;
 
-signal clk_i : bit;
-signal rst_f_i : bit;
-signal count_o : integer;
+    signal clk_i    : bit;
+    signal rst_f_i  : bit;
+    signal count_o  : integer;
 
 begin
 
     -- Unit under test instantiation
     uut : async_rst 
-    port map (  clk => clk_i,
-                rst_f => rst_f_i,
-                count => count_o);
+        port map (
+            clk    => clk_i,
+            rst_f  => rst_f_i,
+            count  => count_o
+        );
     
     -- Clock generation
     clk_gen : process
@@ -38,7 +42,6 @@ begin
     -- Stimulus process
     stimulus : process
     begin
-        
         rst_f_i <= '0';
         
         wait for 10 us;
@@ -48,7 +51,6 @@ begin
         rst_f_i <= '0';
         
         wait;    
-        
     end process;
             
 end Behavioral;
