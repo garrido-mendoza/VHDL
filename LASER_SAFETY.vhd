@@ -1,29 +1,31 @@
+-------------------------------------------------------------------------------------------------------------
+--  Engineer: Diego Garrido-Mendoza
+--  Project: Laser Safety
+--  Company: N/A 
+--  File: laser_safety.vhd
+--  Date: 09/20/2022
+-------------------------------------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
-Library UNISIM;
-use UNISIM.vcomponents.all;
 
-library UNIMACRO;
-use UNIMACRO.vcomponents.all;
-
-entity laser_duty is
+entity laser_safety is
 	port (
-	   clk                 :   in std_logic;			-- clk: 72 MHz clock signal
+	   clk                 :   in std_logic;   -- clk: 72 MHz clock signal
 	   rst                 :   in std_logic;
 	   period_40pc         :   in std_logic_vector(23 downto 0);
-	   safety_disable      :   in std_logic_vector(0 downto 0);	-- "laser safety disable" port, through which s/w will command bypassing this circuit for rectification.  
-	   light_src1          :   in std_logic;			-- light_src1 is the light_src1_en_out signal coming from the image proc. sys ip. it's an active low signal.		
+	   safety_disable      :   in std_logic_vector(0 downto 0);    -- "laser safety disable" port, through which s/w will command bypassing this circuit for rectification.  
+	   light_src1          :   in std_logic;   -- light_src1 is the light_src1_en_out signal coming from the image proc. sys ip. it's an active low signal.		
 	   light_src2          :   in std_logic;
 	   laser_out1	       :   out std_logic;
 	   laser_out2          :   out std_logic;
 	   watchdog_restart    :   out std_logic        
 	);
-end laser_duty;
+end laser_safety;
 			
-architecture behavior of laser_duty is
+architecture behavior of laser_safety is
 
 ------------------------------------------------------------------------------------------------------
 -- Constant Definitions
@@ -179,38 +181,38 @@ begin
                     end if;
                 when s0_A_1 =>  -- watchdog pulse                      
                     if (light_src1_i = '1') then
-                        period_cntr_clr_1       <= '1';		-- clear the 60% timer to begin counting from 0, exactly when the light source turns on. 
-                        pc_cntr_sel_1           <= '0'; 	-- the 40% off time pulse is not generated yet; the light source is on, which triggers the 60% timer. 
-                        laser_o1                <= '1'; 	-- laser output is active and running at 60% duty cycle
-                        wd_cntr_inc_1           <= '1'; 	-- intention: begin generating a 60% wide pulse exactly when the light source is asserted. this pulse is then used to generate the laser output signal.
-                        wd_restart_1            <= '0'; 	-- do not restart the watchdog counter when it must be incrementing. 
-                        laser_duty_state_next_1 <= s1_1;	-- s1_1: 60% timer 
+                        period_cntr_clr_1       <= '1'; -- clear the 60% timer to begin counting from 0, exactly when the light source turns on. 
+                        pc_cntr_sel_1           <= '0'; -- the 40% off time pulse is not generated yet; the light source is on, which triggers the 60% timer. 
+                        laser_o1                <= '1'; -- laser output is active and running at 60% duty cycle
+                        wd_cntr_inc_1           <= '1'; -- intention: begin generating a 60% wide pulse exactly when the light source is asserted. this pulse is then used to generate the laser output signal.
+                        wd_restart_1            <= '0'; -- do not restart the watchdog counter when it must be incrementing. 
+                        laser_duty_state_next_1 <= s1_1;    -- s1_1: 60% timer 
                     else
                         laser_o1                <= '0';                        
                         wd_cntr_inc_1           <= '1';
                         wd_restart_1            <= '0';
-                        laser_duty_state_next_1 <= s0_1;	-- s0_1: idle
+                        laser_duty_state_next_1 <= s0_1;    -- s0_1: idle
                     end if;                                                                
                 when s1_1 =>    --s1_1: 60% timer
                     if (wd_cntr_last_1 = '1') then
                         period_cntr_inc_1       <= '1';
                         pc_cntr_sel_1           <= '0';
                         laser_o1                <= '1';
-                        wd_cntr_clr_1           <= '1';		-- the assertion of the light source also causes the watchdog counter to restart. 
+                        wd_cntr_clr_1           <= '1'; -- the assertion of the light source also causes the watchdog counter to restart. 
                         wd_restart_1            <= '1';
-                        laser_duty_state_next_1 <= s1_A_1;	-- s0_1: idle                
+                        laser_duty_state_next_1 <= s1_A_1;    -- s0_1: idle                
                     elsif (light_src1_i = '0') or (period_cntr_last_60_1 = '1') then    -- this enforces the 40% off time when light source is de-asserted (goes inactive, low)
-                        period_cntr_clr_1       <= '1';		-- clear to begin counting from 0
-                        pc_cntr_sel_1           <= '1'; 	-- begin generating the 40% pulse
-                        laser_o1                <= '0'; 	-- keep the laser output off for this 40% off time
-                        wd_cntr_inc_1           <= '1'; 	-- begin generating the 125ms wide wd restart pulse. 
-                        laser_duty_state_next_1 <= s2_1;	--s2_1: 40% timer                  
+                        period_cntr_clr_1       <= '1'; -- clear to begin counting from 0
+                        pc_cntr_sel_1           <= '1'; -- begin generating the 40% pulse
+                        laser_o1                <= '0'; -- keep the laser output off for this 40% off time
+                        wd_cntr_inc_1           <= '1'; -- begin generating the 125ms wide wd restart pulse. 
+                        laser_duty_state_next_1 <= s2_1;    --s2_1: 40% timer                  
                     else
                         period_cntr_inc_1       <= '1';
                         pc_cntr_sel_1           <= '0';
                         laser_o1                <= '1';
                         wd_cntr_inc_1           <= '1';
-                        laser_duty_state_next_1 <= s1_1;	--s1_1: 60% timer
+                        laser_duty_state_next_1 <= s1_1;    --s1_1: 60% timer
                     end if;                  
                 when s1_A_1 =>
                     if (light_src1_i = '1') and (period_cntr_last_60_1 = '0') then
@@ -235,25 +237,25 @@ begin
                         laser_o1                <= '0';
                         wd_cntr_clr_1           <= '1'; 
                         wd_restart_1            <= '1';
-                        laser_duty_state_next_1 <= s2_A_1;	-- s0_1: idle                     
+                        laser_duty_state_next_1 <= s2_A_1;    -- s0_1: idle                     
                     elsif (light_src1_i = '1') and (period_cntr_last_40_1 = '1') then
                         period_cntr_clr_1       <= '1';
                         pc_cntr_sel_1           <= '0';
                         laser_o1                <= '1';
                         wd_cntr_inc_1           <= '1';
-                        laser_duty_state_next_1 <= s1_1;    	--s1_1: 60% timer
-                    elsif (period_cntr_last_40_1 = '1') then  	-- dgm 6/5/22: this activates the 40% time off enforcement. 
+                        laser_duty_state_next_1 <= s1_1;    --s1_1: 60% timer
+                    elsif (period_cntr_last_40_1 = '1') then  -- dgm 6/5/22: this activates the 40% time off enforcement. 
                         period_cntr_clr_1       <= '1';
                         pc_cntr_sel_1           <= '0';
                         laser_o1                <= '0';
                         wd_cntr_inc_1           <= '1';
-                        laser_duty_state_next_1 <= s0_1;   	-- s0_1: idle                  
+                        laser_duty_state_next_1 <= s0_1;    -- s0_1: idle                  
                     else
                         period_cntr_inc_1       <= '1';
                         pc_cntr_sel_1           <= '1';
                         laser_o1                <= '0';
                         wd_cntr_inc_1           <= '1';
-                        laser_duty_state_next_1 <= s2_1;    	-- s2_1: 40% timer
+                        laser_duty_state_next_1 <= s2_1;    --s2_1: 40% timer
                     end if;
                 when s2_A_1 =>    --s2_A_1: watchdog pulse
                     if (period_cntr_last_40_1 = '1') then
@@ -339,8 +341,8 @@ begin
         else
             case laser_duty_state_reg_2 is
                 when s0_2 =>    -- idle
-                   if (wd_cntr_last_2 = '1') then   	-- the light source is off but the watchdog counter is running. if it's done counting, then wd_cntr_last is asserted. 
-                        laser_o2                <= '0';	-- the light source is off; the laser output must remain off. 
+                   if (wd_cntr_last_2 = '1') then   -- the light source is off but the watchdog counter is running. if it's done counting, then wd_cntr_last is asserted. 
+                        laser_o2                <= '0'; -- the light source is off; the laser output must remain off. 
                         wd_cntr_clr_2           <= '1'; -- one clock cycle long clear pulse. if the watchdog (wd) counter is done, one clock cycle later, it gets cleared to begin counting again (for 9E6 clock cycles). 
                         wd_restart_2            <= '1'; -- flag that gets generated along with the "wd counter clear" and "wd counter last" pulse, 
                         laser_duty_state_next_2 <= s0_A_2;  -- s0_A_2: watchdog pulse
@@ -413,25 +415,25 @@ begin
                         laser_o2                <= '0';
                         wd_cntr_clr_2           <= '1'; 
                         wd_restart_2            <= '1';
-                        laser_duty_state_next_2 <= s2_A_2;	-- s2_A_2: watchdog pulse 
+                        laser_duty_state_next_2 <= s2_A_2;    -- s2_A_2: watchdog pulse 
                     elsif (light_src2_i = '1') and (period_cntr_last_40_2 = '1') then
                         period_cntr_clr_2       <= '1';
                         pc_cntr_sel_2           <= '0';
                         laser_o2                <= '1';
                         wd_cntr_inc_2           <= '1';
-                        laser_duty_state_next_2 <= s1_2;	--s1_2: 60% timer 
-                    elsif (period_cntr_last_40_2 = '1') then  	-- dgm 6/5/22: activates the 40% time off enforcement. 
+                        laser_duty_state_next_2 <= s1_2;    --s1_2: 60% timer 
+                    elsif (period_cntr_last_40_2 = '1') then  -- dgm 6/5/22: activates the 40% time off enforcement. 
                         period_cntr_clr_2       <= '1';
                         pc_cntr_sel_2           <= '0';
                         laser_o2                <= '0';
                         wd_cntr_inc_2           <= '1';
-                        laser_duty_state_next_2 <= s0_2;    	-- s0_2: idle                  
+                        laser_duty_state_next_2 <= s0_2;    -- s0_2: idle                  
                     else
                         period_cntr_inc_2       <= '1';
                         pc_cntr_sel_2           <= '1';
                         laser_o2                <= '0';
                         wd_cntr_inc_2           <= '1';
-                        laser_duty_state_next_2 <= s2_2;    	--s2_2: 40% timer
+                        laser_duty_state_next_2 <= s2_2;    --s2_2: 40% timer
                     end if;
                 when s2_A_2 =>    --s2_A_2: watchdog pulse
                     if (period_cntr_last_40_2 = '1') then
@@ -546,8 +548,8 @@ begin
                         -- restriction: S & R shall not both be '1' at the same time; if they are, the output value is not specified (violation).
     begin
         if (clk'event and clk = '1') then
-            if ((rst_i = '1') or (stretch_cntr_clr = '1')) then	-- rst_i or stretch_cntr_clr corresponds to the reset input (R)
-                flag <= '0';	-- Q = '0'; 'flag' is the output of the SR flip-flop (Q)
+            if ((rst_i = '1') or (stretch_cntr_clr = '1')) then -- rst_i or stretch_cntr_clr corresponds to the reset input (R)
+                flag <= '0';    -- Q = '0'; 'flag' is the output of the SR flip-flop (Q)
             elsif (stretch_cntr_set = '1') then -- 'stretch_cntr_set' is the set input (S)
                 flag <= '1';    -- Q = '1'.
             end if;
