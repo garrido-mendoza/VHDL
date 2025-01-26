@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity thermostat_tb is
-end thermostat_tb;
+entity thermostat_simple_tb is
+end thermostat_simple_tb;
 
-architecture Behavioral of thermostat_tb is
+architecture Behavioral of thermostat_simple_tb is
 
     component thermostat is
         port (
