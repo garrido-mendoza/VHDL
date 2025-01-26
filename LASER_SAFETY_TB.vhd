@@ -83,7 +83,7 @@ end component;
     ---------------------------------------------------------------------
         period_40pc_in <= x"012C60";   -- clock ticks that set the 1,068us-long 40% off time (40% of the 2670us period). 
 --        period_40pc_in <= x"001E0A";   -- clock ticks that set the 106.8us-long 40% off time (40% of the 267us period).
---        period_40pc_in <= x"00E100";    -- clock ticks that set the 800us-long 40% off time (40% of the 2000us period).
+--        period_40pc_in <= x"00E100";   -- clock ticks that set the 800us-long 40% off time (40% of the 2000us period).
 --        period_40pc_in <= x"001680";   -- clock ticks that set the 80us-long 40% off time (40% of the 200us period).
     ---------------------------------------------------------------------   
         wait for clk_period*(30*FRAME_SPACING);   
