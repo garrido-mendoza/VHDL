@@ -6,28 +6,32 @@ end sigclk_tb;
 
 architecture Behavioral of sigclk_tb is
 
-component sigclk is
-    port (  clk             : in bit;
+    component sigclk is
+        port (
+            clk             : in bit;
             rst_f           : in bit;
             data_bus        : in bit_vector(15 downto 0);
             data_strobe     : in bit;
-            registered_data : out bit_vector (15 downto 0));
-end component;
+            registered_data : out bit_vector (15 downto 0)
+        );
+    end component;
 
-signal clk_i : bit := '0';
-signal rst_f_i : bit := '0';
-signal data_bus_i : bit_vector(15 downto 0) := (others => '0');
-signal data_strobe_i : bit := '0';
-signal reg_data_o : bit_vector(15 downto 0);
+    signal clk_i             : bit := '0';
+    signal rst_f_i           : bit := '0';
+    signal data_bus_i        : bit_vector(15 downto 0) := (others => '0');
+    signal data_strobe_i     : bit := '0';
+    signal reg_data_o        : bit_vector(15 downto 0);
 
 begin
 
     uut : sigclk
-        port map (  clk             => clk_i,
-                    rst_f           => rst_f_i,
-                    data_bus        => data_bus_i,
-                    data_strobe     => data_strobe_i,
-                    registered_data => reg_data_o);
+        port map (
+            clk             => clk_i,
+            rst_f           => rst_f_i,
+            data_bus        => data_bus_i,
+            data_strobe     => data_strobe_i,
+            registered_data => reg_data_o
+        );
                     
     -- Clock generation
     clk_process : process
