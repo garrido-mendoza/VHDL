@@ -6,9 +6,9 @@
 --  Date: 08/26/2022
 -------------------------------------------------------------------------------------------------------------
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
 entity laser_safety_tb is
 end laser_safety_tb;
