@@ -10,7 +10,6 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
-
 entity laser_safety is
 	port (
 	   clk                 :   in std_logic;   -- clk: 72 MHz clock signal
