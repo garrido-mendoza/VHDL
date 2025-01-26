@@ -64,7 +64,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --------------------------------------------------------------------------------- 
 -- Example 2 - THERMOSTAT LOGIC USING COMBINATORIAL LOGIC & CLOCKED PROCESSES
 ---------------------------------------------------------------------------------
-entity thermostat is
+entity thermostat_simple is
     port (
         clk             : in bit;
         rst             : in bit;
@@ -77,9 +77,9 @@ entity thermostat is
         a_c_on          : out bit;   -- The a/c only comes on if the current temperature is greater than the desired temperature.
         furnace_on      : out bit    -- The furnace should come on only if the current temperature is less than the desired temperature.
     );
-end thermostat;
+end thermostat_simple;
 
-architecture rtl of thermostat is
+architecture rtl of thermostat_simple is
 
     -- Input register signals
     signal current_temp_reg    : bit_vector(6 downto 0);
