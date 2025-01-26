@@ -4,10 +4,10 @@ use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL;
 use std.textio.all; -- Import TextIO package
 
-entity TB_Parallel_FIR_Filter is
-end TB_Parallel_FIR_Filter;
+entity Parallel_FIR_Filter_TB is
+end Parallel_FIR_Filter_TB;
 
-architecture testbench of TB_Parallel_FIR_Filter is
+architecture testbench of Parallel_FIR_Filter_TB is
     -- Component declaration
     component Parallel_FIR_Filter is
         Generic (
