@@ -2,12 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.all;
 
-entity univ_shift_reg_tb is
-end univ_shift_reg_tb;
+entity Univ_Shift_Reg_TB is
+end Univ_Shift_Reg_TB;
 
-architecture Behavioral of univ_shift_reg_tb is
+architecture Behavioral of Univ_Shift_Reg_TB is
 
-    component univ_shift_reg is
+    component Univ_Shift_Reg is
         generic (data_width : integer := 8);
         port (
             clk : in std_logic;
@@ -26,7 +26,7 @@ architecture Behavioral of univ_shift_reg_tb is
 
 begin
 
-    uut : univ_shift_reg
+    uut : Univ_Shift_Reg
         port map (
             clk => clk_i,
             rst => rst_i,
