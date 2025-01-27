@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity async_rst_tb is
-end async_rst_tb;
+entity Async_Rst_TB is
+end Async_Rst_TB;
 
-architecture Behavioral of async_rst_tb is
+architecture Behavioral of Async_Rst_TB is
 
     component async_rst is
         port (
