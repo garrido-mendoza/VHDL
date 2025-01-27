@@ -21,7 +21,7 @@ architecture tb of Pseudo_BRAM_TB is
     
 begin
     -- Instantiate the module under test
-    uut: entity work.pseudo_bram
+    uut: entity work.Pseudo_BRAM
         generic map (
             DATA_WIDTH => DATA_WIDTH,
             ADDR_WIDTH => ADDR_WIDTH
