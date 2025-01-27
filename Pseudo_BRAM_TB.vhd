@@ -3,10 +3,10 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 use STD.TEXTIO.all;
 
-entity pseudo_bram_tb is
-end pseudo_bram_tb;
+entity Pseudo_BRAM_TB is
+end Pseudo_BRAM_TB;
 
-architecture tb of pseudo_bram_tb is
+architecture tb of Pseudo_BRAM_TB is
     constant DATA_WIDTH : natural := 16;
     constant ADDR_WIDTH : natural := 16;
 
