@@ -2,10 +2,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity TB_MACC_MACRO is
-end TB_MACC_MACRO;
+entity MACC_MACRO_TB is
+end MACC_MACRO_TB;
 
-architecture Behavioral of TB_MACC_MACRO is
+architecture Behavioral of MACC_MACRO_TB is
     -- Component Declaration for the Unit Under Test (UUT)
     component MACC_MACRO
         generic (
