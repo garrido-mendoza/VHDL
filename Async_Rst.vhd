@@ -1,15 +1,15 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity async_rst is
+entity Async_Rst is
     port (
         clk    : in bit;
         rst_f  : in bit;
         count  : out integer
     );
-end async_rst;
+end Async_Rst;
 
-architecture rtl of async_rst is
+architecture rtl of Async_Rst is
 
     signal rst_f_i : bit;
     signal count_o : integer;
