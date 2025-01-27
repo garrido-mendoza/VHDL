@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity thermostat is
+entity Thermostat is
     port (
         clk             : in std_logic;
         rst             : in std_logic;
@@ -17,9 +17,9 @@ entity thermostat is
         furnace_on      : out std_logic;  -- The furnace should come on only if the current temperature is less than the desired temperature.
         fan_on          : out std_logic   -- Output that controls the fan.
     );
-end thermostat;
+end Thermostat;
 
-architecture rtl of thermostat is
+architecture rtl of Thermostat is
 
     -- Type declaration for state machine
     type state_type is (state_idle, state_heat_on, state_furnace_hot, state_furnace_cool, state_cool_on, state_ac_ready, state_ac_done);    -- Enumerated data type.
