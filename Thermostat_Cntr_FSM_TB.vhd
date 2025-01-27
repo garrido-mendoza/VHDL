@@ -2,12 +2,12 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity thermostat_tb is
-end thermostat_tb;
+entity Thermostat_Cntr_FSM_TB is
+end Thermostat_Cntr_FSM_TB;
 
-architecture Behavioral of thermostat_tb is
+architecture Behavioral of Thermostat_Cntr_FSM_TB is
 
-    component thermostat is
+    component Thermostat is
         port (
             clk             : in std_logic;
             rst             : in std_logic;
@@ -44,7 +44,7 @@ architecture Behavioral of thermostat_tb is
 
 begin
 
-    uut : thermostat
+    uut : Thermostat
         port map (
             clk             => clk_i,
             rst             => rst_i,
