@@ -10,7 +10,7 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
-entity laser_safety is
+entity Laser_Safety is
 	port (
 	   clk                 :   in std_logic;   -- clk: 72 MHz clock signal
 	   rst                 :   in std_logic;
@@ -22,9 +22,9 @@ entity laser_safety is
 	   laser_out2          :   out std_logic;
 	   watchdog_restart    :   out std_logic        
 	);
-end laser_safety;
+end Laser_Safety;
 			
-architecture behavior of laser_safety is
+architecture behavior of Laser_Safety is
 
 ------------------------------------------------------------------------------------------------------
 -- Constant Definitions
