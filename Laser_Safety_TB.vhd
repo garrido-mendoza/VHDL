@@ -2,7 +2,7 @@
 --  Engineer: Diego Garrido-Mendoza
 --  Project: Laser Safety - Testbench
 --  Company: N/A 
---  File: laser_safety_tb.vhd
+--  File: Laser_Safety_TB.vhd
 --  Date: 08/26/2022
 -------------------------------------------------------------------------------------------------------------
 
@@ -10,15 +10,15 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
 
-entity laser_safety_tb is
-end laser_safety_tb;
+entity Laser_Safety_TB is
+end Laser_Safety_TB;
 
-architecture behavior of laser_safety_tb is
+architecture behavior of Laser_Safety_TB is
 
 ------------------------------------------------------------------------------------------------------
 -- Component Declaration
 ------------------------------------------------------------------------------------------------------ 
-component laser_safety is
+component Laser_Safety is
 	port (
 	   clk                 :   in std_logic;   -- clk: 72 MHz clock signal
 	   rst                 :   in std_logic;
