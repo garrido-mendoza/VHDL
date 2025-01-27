@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity pseudo_bram is
+entity Pseudo_BRAM is
     generic (
         DATA_WIDTH : natural := 16;
         ADDR_WIDTH : natural := 16
@@ -15,9 +15,9 @@ entity pseudo_bram is
         din   : in std_logic_vector(DATA_WIDTH-1 downto 0);
         dout  : out std_logic_vector(DATA_WIDTH-1 downto 0)
     );
-end pseudo_bram;
+end Pseudo_BRAM;
 
-architecture rtl of pseudo_bram is
+architecture rtl of Pseudo_BRAM is
     type ram_type is array (0 to 2**ADDR_WIDTH-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
     signal ram : ram_type := (others => (others => '0'));
 begin
