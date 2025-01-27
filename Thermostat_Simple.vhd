@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --------------------------------------------------------------------------------- 
 -- Example 1 - THERMOSTAT LOGIC USING COMBINATORIAL LOGIC
 --------------------------------------------------------------------------------- 
---entity thermostat is
+--entity Thermostat_Simple is
 --  port (    current_temp    : in bit_vector(6 downto 0);
 --            desired_temp    : in bit_vector(6 downto 0);
 --            display_select  : in bit;
@@ -13,9 +13,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --            temp_display    : out bit_vector(6 downto 0);
 --            a_c_on          : out bit;   -- The a/c only comes on if the current temperature is greater than the desired temperature.
 --            furnace_on      : out bit);  -- The furnace should come on only if the current temperature is less than the desired temperature. 
---end thermostat;
+--end Thermostat_Simple;
 
---architecture Behavioral of thermostat is
+--architecture Behavioral of Thermostat_Simple is
 
 --signal temp_display_o : bit_vector(6 downto 0);
 --signal a_c_on_o : bit;
@@ -64,7 +64,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --------------------------------------------------------------------------------- 
 -- Example 2 - THERMOSTAT LOGIC USING COMBINATORIAL LOGIC & CLOCKED PROCESSES
 ---------------------------------------------------------------------------------
-entity thermostat_simple is
+entity Thermostat_Simple is
     port (
         clk             : in bit;
         rst             : in bit;
@@ -77,9 +77,9 @@ entity thermostat_simple is
         a_c_on          : out bit;   -- The a/c only comes on if the current temperature is greater than the desired temperature.
         furnace_on      : out bit    -- The furnace should come on only if the current temperature is less than the desired temperature.
     );
-end thermostat_simple;
+end Thermostat_Simple;
 
-architecture rtl of thermostat_simple is
+architecture rtl of Thermostat_Simple is
 
     -- Input register signals
     signal current_temp_reg    : bit_vector(6 downto 0);
