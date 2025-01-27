@@ -1,12 +1,12 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity thermostat_simple_tb is
-end thermostat_simple_tb;
+entity Thermostat_Simple_TB is
+end Thermostat_Simple_TB;
 
-architecture Behavioral of thermostat_simple_tb is
+architecture Behavioral of Thermostat_Simple_TB is
 
-    component thermostat is
+    component Thermostat_Simple is
         port (
             clk             : in bit;
             rst             : in bit;
@@ -37,7 +37,7 @@ architecture Behavioral of thermostat_simple_tb is
 
 begin
 
-    uut : thermostat
+    uut : Thermostat_Simple
         port map (
             clk             => clk_i,
             rst             => rst_i,
