@@ -55,7 +55,7 @@ end component;
     signal wd_restart           :   std_logic;    
     
     begin    
-    UUT : component laser_safety 
+    UUT : component Laser_Safety
         port map (
             clk                 => clk_in,
             rst                 => rst_in,
