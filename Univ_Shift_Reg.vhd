@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.all;
 
-entity univ_shift_reg is
+entity Univ_Shift_Reg is
     generic (
         data_width : integer := 8
     );
@@ -14,9 +14,9 @@ entity univ_shift_reg is
         S   : in std_logic_vector(data_width - 7 downto 0); -- Shift instruction. 
         A   : out std_logic_vector(data_width - 1 downto 0)
     );
-end univ_shift_reg;
+end Univ_Shift_Reg;
 
-architecture Behavioral of univ_shift_reg is
+architecture Behavioral of Univ_Shift_Reg is
     signal A_reg : std_logic_vector(data_width - 1 downto 0);
 begin
     usr : process(clk)
