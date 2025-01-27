@@ -1,10 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity clken_tb is
-end clken_tb;
+entity Clken_TB is
+end Clken_TB;
 
-architecture Behavioral of clken_tb is
+architecture Behavioral of Clken_TB is
 
     component clken is
         port (
