@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------------------------------------
 --  Engineer: Diego Garrido-Mendoza
---  Project: Laser Safety
+--  Project: Laser Safety (DEMO)
 --  Company: N/A 
---  File: laser_safety.vhd
+--  File: Laser_Safety.vhd
 --  Date: 09/20/2022
 -------------------------------------------------------------------------------------------------------------
 library IEEE;
@@ -487,14 +487,6 @@ begin
 ---------------------------------------------------------------------------------------------------------------------------
 -- *** WATCHDOG COUNTER
 ---------------------------------------------------------------------------------------------------------------------------  
-    -- dgm 09/15/22: a single watchdog counter (wd_cntr) determines when wd_cntr_last pulse is generated. 
-    -- for the watchdog_restart output pulse to be true, the watchdog FSM and both laser safety FSMs see 
-    -- their associated "watchdog counter last" pulses, at the same time. this means that both channels are 
-    -- running synchronously after reset, all the time. if one of these watchdog_restart pulses is not present 
-    -- when the other is, then power off both lasers. the watchdog_restart pulses are present at the same time 
-    -- because their respective channels are synchronous (to honor the watchdog logic), and respond the same way to reset.   
-    -- when the wd_cntr_last pulse arrive to the watchdog state machine and both safety FSMs, the pulses wd_restart1 and 
-    -- wd_restart2 get generated in the same clock cycle.      
 
     -- watchdog counter update
     wd_cntr_update: process(clk,rst_i)
@@ -507,19 +499,11 @@ begin
                 end if;
             end if;
     end process wd_cntr_update;
-    
-    -- watchdog counter next state.
-    -- dgm 09/14/22: important to note that for the watchdog counter to work, the watchdog state machine embedded 
-    -- in both channels must be running (then, wd_cntr_clr_N & wd_cntr_inc_N can be true). 
-    -- dgm 09/15/22: we need wd_cntr_clr_1, wd_cntr_clr_2, wd_cntr_inc_1 and wd_cntr_inc_2, otherwise, wd_cntr_clr and wd_cntr_inc are multidriven nets,
-    -- which results in critical warnings during synthesis ([Synth 8-6859] multi-driven net...) and implementation failure, due to the same reason. 
+
     wd_cntr_next    <=  (others => '0')     when wd_cntr_clr_1 = '1' and wd_cntr_clr_2 = '1' else 
                         wd_cntr + 1         when wd_cntr_inc_1 = '1' and wd_cntr_inc_2 = '1' else
                         wd_cntr;
-      
-    -- watchdog last period count and comparator logic.
-    -- dgm 09/15/22: we have a single watchdog counter but 2 wd_cntr_last pulses associated to the laser safety FSMs. 
-    -- this allows us to enforce the watchdog priority in both laser safety FSMs, and to generate wd_restart_1 and wd_restart_2. 
+
     wd_cntr_last_1  <=  '1'                 when wd_cntr = wd_restart_spacing else    -- wd_restart_spacing = 9E6 clock cycles -> ~120ms.    
                         '0';
 
