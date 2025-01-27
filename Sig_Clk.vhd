@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- This signal clocking logic allows us to capture data from a data bus using a data strobe.
-entity sigclk is
+entity Sig_Clk is
     port (
         clk             : in bit;
         rst_f           : in bit;
@@ -10,9 +10,9 @@ entity sigclk is
         data_strobe     : in bit;
         registered_data : out bit_vector(15 downto 0)
     );
-end sigclk;
+end Sig_Clk;
 
-architecture Behavioral of sigclk is
+architecture Behavioral of Sig_Clk is
 
     signal reg_data_o : bit_vector(15 downto 0);
 
