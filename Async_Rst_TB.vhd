@@ -21,7 +21,7 @@ architecture Behavioral of Async_Rst_TB is
 begin
 
     -- Unit under test instantiation
-    uut : async_rst 
+    uut : Async_Rst 
         port map (
             clk    => clk_i,
             rst_f  => rst_f_i,
