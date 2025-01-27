@@ -1,12 +1,12 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity sigclk_tb is
-end sigclk_tb;
+entity Sig_Clk_TB is
+end Sig_Clk_TB;
 
-architecture Behavioral of sigclk_tb is
+architecture Behavioral of Sig_Clk_TB is
 
-    component sigclk is
+    component Sig_Clk is
         port (
             clk             : in bit;
             rst_f           : in bit;
@@ -24,7 +24,7 @@ architecture Behavioral of sigclk_tb is
 
 begin
 
-    uut : sigclk
+    uut : Sig_Clk
         port map (
             clk             => clk_i,
             rst_f           => rst_f_i,
