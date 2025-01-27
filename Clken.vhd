@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity clken is
+entity Clken is
     port (
         clk      : in bit;
         rst_f    : in bit;
@@ -9,9 +9,9 @@ entity clken is
         enable   : in bit;
         data_out : out bit
     );
-end clken;
+end Clken;
 
-architecture rtl of clken is
+architecture rtl of Clken is
 
     signal rst_f_i       : bit;
     signal data_i        : bit;
