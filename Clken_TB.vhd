@@ -6,7 +6,7 @@ end Clken_TB;
 
 architecture Behavioral of Clken_TB is
 
-    component clken is
+    component Clken is
         port (
             clk      : in bit;
             rst_f    : in bit;
@@ -25,7 +25,7 @@ architecture Behavioral of Clken_TB is
 begin
 
     -- Unit under test instantiation
-    uut : clken 
+    uut : Clken 
         port map (
             clk      => clk_i,
             rst_f    => rst_f_i,
