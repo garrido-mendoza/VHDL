@@ -58,10 +58,10 @@ use UNIMACRO.vcomponents.all;
 -- arithmetic operations correctly under various input conditions.
 -- ========================================================================================================================================
 
-entity TB_ADDMACC_MACRO is
-end TB_ADDMACC_MACRO;
+entity ADDMACC_MACRO_TB is
+end ADDMACC_MACRO_TB;
 
-architecture Behavioral of TB_ADDMACC_MACRO is
+architecture Behavioral of ADDMACC_MACRO_TB is
 
     component ADDMACC_MACRO
         generic (
