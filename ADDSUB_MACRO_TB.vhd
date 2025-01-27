@@ -2,10 +2,10 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity TB_ADDSUB_MACRO is
-end TB_ADDSUB_MACRO;
+entity ADDSUB_MACRO_TB is
+end ADDSUB_MACRO_TB;
 
-architecture Behavioral of TB_ADDSUB_MACRO is
+architecture Behavioral of ADDSUB_MACRO_TB is
 
     -- Constant Declaration
     constant WIDTH : integer := 48;
